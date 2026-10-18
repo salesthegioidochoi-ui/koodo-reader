@@ -18,6 +18,7 @@ class Sidebar extends React.Component<SidebarProps, SidebarState> {
   private newShelfInput = React.createRef<HTMLInputElement>();
   constructor(props: SidebarProps) {
     super(props);
+    const isMobileViewport = window.matchMedia("(max-width: 768px)").matches;
     this.state = {
       mode: "home",
       hoverMode: "",
@@ -26,13 +27,18 @@ class Sidebar extends React.Component<SidebarProps, SidebarState> {
       isOpenDelete: false,
       shelfTitle: "",
       isCollapsed:
-        ConfigService.getReaderConfig("isCollapsed") === "yes" || false,
+        isMobileViewport ||
+        ConfigService.getReaderConfig("isCollapsed") === "yes" ||
+        false,
       isCreateShelf: false,
       newShelfName: "",
       dropTargetShelf: "",
     };
   }
   componentDidMount() {
+    if (window.matchMedia("(max-width: 768px)").matches) {
+      this.props.handleCollapse(true);
+    }
     this.props.handleMode(
       document.URL.split("/").reverse()[0] === "empty"
         ? "home"
