@@ -36,9 +36,6 @@ jobs:
           java-version: 21
           cache: gradle
 
-      - name: Set up Android SDK
-        uses: android-actions/setup-android@v3
-
       - name: Install JavaScript dependencies
         run: yarn install --frozen-lockfile --ignore-scripts
 
