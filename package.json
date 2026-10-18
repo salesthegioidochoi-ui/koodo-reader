@@ -19,6 +19,8 @@
   },
   "dependencies": {
     "@aws-sdk/client-s3": "3.564.0",
+    "@capacitor/android": "8",
+    "@capacitor/core": "8",
     "@mozilla/readability": "^0.6.0",
     "axios": "0.31.1",
     "basic-ftp": "5.3.1",
@@ -67,6 +69,7 @@
     "yazl": "^3.3.1"
   },
   "devDependencies": {
+    "@capacitor/cli": "8",
     "@types/copy-text-to-clipboard": "^2.0.4",
     "@types/file-saver": "^2.0.7",
     "@types/hammerjs": "^2.0.46",
@@ -115,6 +118,8 @@
     "dev": "concurrently \"cross-env BROWSER=none npm start\" \"wait-on http://127.0.0.1:3000/ && nodemon --watch main.js --watch src/utils/plugins/main --ext js --exec electron .\"",
     "release": "electron-builder",
     "prerelease": "yarn build",
+    "android:sync": "yarn build && cap sync android",
+    "android:apk": "yarn android:sync && cd android && gradlew.bat assembleDebug",
     "postinstall": "node scripts/patch-nan.js && electron-builder install-app-deps",
     "rebuild": "electron-rebuild -f -w better-sqlite3"
   },
